@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { AgioCoreModule, LoggerService, ERROR_LEVEL } from '../agio-core';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule, FormsModule,
