@@ -1,0 +1,39 @@
+<!--Creación de un Formulario sencillo-->
+
+<form #miForm="ngForm">
+  <dl>
+    <dt>CODIGO:</dt>
+    <dd *ngIf="VM.Modo === 'add'">
+      <input type="number" name="id" id="id" [(ngModel)]="VM.Elemento.id" #id="ngModel" required>
+      <span class="errorMsg" [hidden]="!id.errors?.required || miForm.pristine"> Es obligatorio.</span>
+    </dd>
+    <dd *ngIf="VM.Modo !== 'add'">
+        {{VM.Elemento.id}}
+      </dd>
+    <dt>NOMBRE:</dt>
+    <dd>
+      <input type="text" name="nombre" id="nombre" [(ngModel)]="VM.Elemento.nombre" #nombre="ngModel"
+      required minlength="2" maxlength="10">
+      <span class="errorMsg" [hidden]="!nombre.errors?.required"> Es obligatorio.</span>
+      <span class="errorMsg" [hidden]="!nombre.errors?.minlength || !nombre.errors?.maxlength">
+        Debe tener entre 2 y 10 caractéres.</span>
+    </dd>
+    <dt>APELLIDOS:</dt>
+    <dd>
+      <input type="text" name="apellidos" id="apellidos" [(ngModel)]="VM.Elemento.apellidos" #apellidos="ngModel"
+      minlength="2" maxlength="10" upperCase>
+      <span class="errorMsg" [hidden]="!apellidos.errors?.minlength && !apellidos.errors?.maxlength"> Debe tener entre 2 y 10 caractéres.</span>
+      <span *ngIf="nombre?.errors?.upperCase"> Tiene que ir en mayúsculas</span>
+    </dd>
+    <dt>EDAD:</dt>
+    <dd>
+      <input type="number" name="edad" id="edad" [(ngModel)]="VM.Elemento.edad" #edad="ngModel" min="18" max="67">
+      <span class="errorMsg" [hidden]="!edad.errors?.min && !edad.errors?.max">
+          Debe estar entre 18 y 67 años.</span>
+    </dd>
+  </dl>
+  <p>
+    <input type="button" value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid">
+    <input type="button" value="Volver" (click)="VM.cancel()">
+  </p>
+</form>

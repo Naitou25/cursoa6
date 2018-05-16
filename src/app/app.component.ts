@@ -7,11 +7,10 @@ import { NotifyService } from './services/notify.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Hola mundo';
 
   constructor(private ns: NotifyService) {
   }
   ngOnInit(): void {
-    this.ns.add('Demo error en AppComponent');
+    // this.ns.add('Demo error en AppComponent');
   }
 }

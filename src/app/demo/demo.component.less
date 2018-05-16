@@ -1,0 +1,28 @@
+@colorLetraClaro: navy;
+@colorFondoClaro: rgb(146, 228, 255);
+@colorLetraOscuro: @colorFondoClaro;
+@colorFondoOscuro: @colorLetraClaro;
+
+.destacar {
+  text-decoration: line-through;
+}
+.important {
+  font-weight: bold;
+}
+:host{
+  border: 1px solid #3cade7;
+  margin: 5%;
+}
+
+:host-context(.temaClaro) {
+  h1{
+  background-color: @colorFondoClaro;
+  color: @colorLetraClaro;
+  }
+}
+:host-context(.temaOscuro) {
+  h1{
+  background-color: @colorFondoOscuro;
+  color: @colorLetraOscuro;
+  }
+}

@@ -1,3 +1,36 @@
+<h1>Demo para {{nombre | elipsis:20 | titlecase}}</h1>
 <p>
-  demo works!
+  <input type="text" [(ngModel)] = "nombre">
+  <input type="button" value="saluda" (click)="saluda()">
+  <input type="button" value="despide" (click)="despide()">
+  <input type="button" value="di" (click)="di('algo')">
+  <input type="button" value="cambia" (click)="cambia()">
+  <input type="button" value="Notifica" (click)="Notificaciones.add('Demo error')">
+</p>
+<p [textContent]="resultado" [class.errorMsg]="!visible">xxxxxx</p>
+<p [hidden]="!visible">Ahora me ves</p>
+<p *ngIf="visible">Ahora existo</p>
+<p [ngClass]="conEstilo">Parrafo con estética</p>
+<p>
+  calcula: 2 + 2 = {{ (2 + 2) | percent:'2.2-2' }} = {{ calcula(2, 2) | currency:'EUR':'symbol':'1.2-2' }}
+</p>
+<ul>
+  <li *ngFor = "let item of listado; let i = index; let fondo=odd;"
+    [style.background-color]="fondo ? 'LightBlue' : 'Lavender'">
+    {{ i + 1 }}  {{ item.nombre | titlecase}} ({{ item.id }})
+  </li>
+</ul>
+<p>
+  <select [(ngModel)]="idProvincia">
+    <option value="">--Elige opción--</option>
+    <option *ngFor="let p of listado" [value]="p.id">{{p.nombre | uppercase}}</option>
+  </select>
+  Seleccionado: {{idProvincia}}
+  <input type="text" value="" #txtProvincia>
+  <input type="button" value="Add" (click)="add(txtProvincia.value)">
+</p>
+{{listado | json}}
+<agio-font-sizer [(size)]="font"></agio-font-sizer>
+<p [style.font-size.px]="font">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
 </p>

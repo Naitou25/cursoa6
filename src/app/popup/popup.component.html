@@ -1,0 +1,11 @@
+<div>
+  <!--Primero capturamos si el Servicio se ha activado, es decir, si esta vacio o tiene algo-->
+  <ul *ngIf="srv.Listado && srv.Listado.length > 0">
+    <!--Despues, como hemos recorrido el Listado y tiene algo, nos recorremos el Listado en busca del dato/s-->
+    <li *ngFor="let item of srv.Listado; let i=index;">
+      {{item.Mensaje}} <!--Con esto printamos lo que tiene el array posicion a posicion-->
+      <input type="text" value="X" (click)=srv.remove(i);><!--con esta declaracion creamos una X donde podremos clicar para quitar ese elemento de la lista-->
+    </li>
+    <input type="button" Value="Clear" (click)=srv.clear();><!--Con esta ultima lo que hacemos es borrar todos los elementos-->
+  </ul>
+</div>

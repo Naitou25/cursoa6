@@ -1,0 +1,26 @@
+table{
+  border: 1px solid #3babe2;
+  position: absolute;
+  top:23%;
+  left: 25%;
+}
+
+td{
+  border: 1px solid rgb(218, 126, 255);
+}
+
+h1{
+  position: absolute;
+  left: 40%;
+}
+
+dl{
+  position: absolute;
+  top:23%;
+  left: 35%;
+}
+p{
+  position: absolute;
+  top: 75%;
+  left: 35%;
+}

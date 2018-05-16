@@ -1,0 +1,52 @@
+<!--Creación de un Formulario sencillo-->
+
+<form #miForm="ngForm">
+    <dl>
+      <dt>CODIGO:</dt>
+      <dd *ngIf="VMB.Modo === 'add'">
+        <input type="number" name="id" id="id" [(ngModel)]="VMB.Elemento.id" #id="ngModel" required>
+        <span class="errorMsg" [hidden]="!id.errors?.required || miForm.pristine"> Es obligatorio.</span>
+      </dd>
+      <dd *ngIf="VMB.Modo !== 'add'">
+          {{VMB.Elemento.id}}
+        </dd><dt></dt>
+      <dt>TITULO:</dt>
+      <dd>
+        <input type="text" name="titulo" id="titulo" [(ngModel)]="VMB.Elemento.titulo" #titulo="ngModel"
+        required minlength="1" maxlength="50">
+        <span class="errorMsg" [hidden]="!titulo.errors?.required"> Es obligatorio.</span>
+        <span class="errorMsg" [hidden]="!titulo.errors?.minlength || !titulo.errors?.maxlength">
+          Debe tener entre 1 y 50 caractéres.</span>
+      </dd><dt></dt>
+      <dt>TEXTO:</dt>
+      <dd>
+        <textarea name="texto" id="texto" rows= "4" cols= "50" [(ngModel)]="VMB.Elemento.texto" #texto="ngModel"></textarea>
+      </dd><dt></dt>
+      <dt>AUTOR:</dt>
+      <dd>
+        <input type="text" name="autor" id="autor" [(ngModel)]="VMB.Elemento.autor" #autor="ngModel" minlength="2" maxlength="20">
+        <span class="errorMsg" [hidden]="!autor.errors?.minlength && !autor.errors?.maxlength">
+            Debe tener entre 2 y 20 caractéres.</span>
+      </dd><dt></dt>
+      <dt>FECHA:</dt>
+      <dd>
+        <input type="date" name="fecha" id="fecha" value="2018-05-11" [(ngModel)]="VMB.Elemento.fecha" #autor="ngModel"
+        min="2016-01-01" max="2018-05-11">
+      </dd><dt></dt>
+      <dt>ME GUSTA:</dt>
+      <dd *ngIf="VMB.Modo === 'add'">
+          <input type="number" name="id" id="id" value="0" readonly="readonly">
+        </dd>
+        <dd *ngIf="VMB.Modo !== 'add'">
+            {{VMB.Elemento.megusta}}
+        </dd><dt></dt>
+      <dt>FOTO:</dt>
+      <dd>
+        <input type="text" name="foto" id="foto" [(ngModel)]="VMB.Elemento.foto" #autor="ngModel">
+      </dd>
+    </dl>
+    <p>
+      <input type="button" value="Enviar" (click)="VMB.send()" [disabled]="miForm.invalid">
+      <input type="button" value="Volver" (click)="VMB.cancel()">
+    </p>
+  </form>
