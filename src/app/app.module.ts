@@ -7,6 +7,7 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AgioCoreModule, LoggerService, ERROR_LEVEL } from '../agio-core';
 
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { PopupComponent } from './popup/popup.component';
 import { DinamicosComponent } from './dinamicos/dinamicos.component';
 import { PERSONAS_COMPONENT } from './personas/personas.component';
 import { BLOG_COMPONENT } from './blog/blog.component';
+import { PersonasVMService, PersonasDAOVMService } from './personas/personas-vm.service';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,14 @@ import { BLOG_COMPONENT } from './blog/blog.component';
   ],
   imports: [
     BrowserModule, FormsModule,
-    AgioCoreModule
+    HttpClientModule,
+    AgioCoreModule,
   ],
   providers: [
     LoggerService,
-    {provide: ERROR_LEVEL, useValue: 4 },
+    { provide: ERROR_LEVEL, useValue: 4 },
     { provide: LOCALE_ID, useValue: 'es' },
+    { provide: PersonasVMService, useClass: PersonasDAOVMService}
   ],
   bootstrap: [AppComponent]
 })

@@ -2,8 +2,11 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
+// WSURL sirve para guardar el servidor de produccion en un variable y asi evitar la opia masiva de la URL
 export const environment = {
-  production: false
+  production: false,
+  WSUrl: 'http://localhost:4321/ws/'
 };
 
 /*
