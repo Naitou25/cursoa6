@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="/"><img src="assets/logo.jpg"></a>
+    <a class="navbar-brand" routerLink="/">logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -19,12 +19,12 @@
           <a class="nav-link" routerLink="/personas">Personas</a>
         </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" routerLink="/personas">Blog</a>
+          <a class="nav-link" routerLink="/blog">Blog</a>
         </li>
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <a class="nav-link" routerLink="/config">Config</a>
         </li>
       </ul>
-
+      <app-login></app-login>
     </div>
   </nav>

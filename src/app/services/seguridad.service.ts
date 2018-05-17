@@ -3,9 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpInterceptor, HttpRequest, HttpHandle
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { LoggerService } from '../../agio-core';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
   export class AuthService {
+    private isAuth = false;
+    private authToken: string = '';
+    private name = '';
 
     constructor() {
       if (localStorage && localStorage.AuthService) {
@@ -15,11 +19,6 @@ import { LoggerService } from '../../agio-core';
         this.name = rslt.name;
       }
     }
-
-    private isAuth = false;
-    // tslint:disable-next-line:no-inferrable-types
-    private authToken: string = '';
-    private name = '';
 
     get AuthorizationHeader() {
       return this.authToken;

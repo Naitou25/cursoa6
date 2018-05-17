@@ -9,9 +9,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgioCoreModule, LoggerService, ERROR_LEVEL } from '../agio-core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { PersonasVMService, PersonasDAOVMService } from './personas/personas-vm.service';
 import { AuthInterceptor, LoggingInterceptor } from './services/seguridad.service';
@@ -45,7 +46,7 @@ import { MenuComponent } from './menu/menu.component';
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(routes),
-    AgioCoreModule,
+    AgioCoreModule, NgbModule.forRoot()
   ],
   providers: [
     LoggerService,
