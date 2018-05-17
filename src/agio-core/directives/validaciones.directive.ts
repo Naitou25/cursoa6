@@ -141,6 +141,7 @@ export function nifNumberValidator(): ValidatorFn {
     if (/^(\d{8})([A-Z])$/.test(control.value)) {
       const letterValue = control.value.substr(control.value.length - 1);
       const numberValue = control.value.substr(0, control.value.length - 1);
+      return control.value; // revisar ya que este no es el final del codigo propuesto
     }
 
 
