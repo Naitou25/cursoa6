@@ -136,6 +136,14 @@ export class NaturalNumberValidatorDirective implements Validator {
 
 export function nifNumberValidator(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} => {
+    const err = { nifNumber: { invalidNif: true } };
+    if (!control.value) { return null; }
+    if (/^(\d{8})([A-Z])$/.test(control.value)) {
+      const letterValue = control.value.substr(control.value.length - 1);
+      const numberValue = control.value.substr(0, control.value.length - 1);
+    }
+
+
     return /^(\d{8})([A-Z])$/.test(control.value) ? null : {
       nifNumber: {
         valid: false
@@ -153,7 +161,6 @@ export class NifNumberValidatorDirective implements Validator {
   constructor ( @Attribute('validateEqual') public validateEqual: string) {}
   validate(control: AbstractControl): { [key: string]: any } {
     const valor = control.value;
-    const cntrlBind = control.root.get(this.validateEqual);
     if (control.value) {
       return nifNumberValidator()(control);
       }
