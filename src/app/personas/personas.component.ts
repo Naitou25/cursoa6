@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PersonasVMService } from './personas-vm.service';
+import { switchMap, tap } from 'rxjs/operators';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-personas',
@@ -28,6 +30,7 @@ export class PersonasListComponent implements OnInit {
    public get VM () { return this.vm; }
 
   ngOnInit() {
+    this.vm.list();
   }
 
 }
@@ -43,6 +46,7 @@ export class PersonasAddComponent implements OnInit {
   public get VM () { return this.vm; }
 
   ngOnInit() {
+    this.vm.add();
   }
 
 }
@@ -67,14 +71,24 @@ export class PersonasEditComponent implements OnInit {
   templateUrl: './tmpl-view.component.html',
   styleUrls: ['./personas.component.css']
 })
-export class PersonasViewComponent implements OnInit {
+export class PersonasViewComponent implements OnInit, OnDestroy {
+  private obs$: any;
 
-  constructor(private vm: PersonasVMService) { }
+  constructor(private vm: PersonasVMService, private route: ActivatedRoute, private router: Router) { }
    public get VM () { return this.vm; }
 
-  ngOnInit() {
-  }
-
+    ngOnInit() {
+        this.obs$ = this.route.paramMap.subscribe(
+          params => {
+            const id = +params.get['id']; // (+) converts string 'id' to a number
+            if (id) {
+            this.vm.view(id);
+          } else {
+            this.router.navigate(['/404.html']);
+          }
+        });
+    }
+   ngOnDestroy() { this.obs$.unsubscribe(); }
 }
 
 export const PERSONAS_COMPONENT = [PersonasComponent, PersonasListComponent, PersonasAddComponent,

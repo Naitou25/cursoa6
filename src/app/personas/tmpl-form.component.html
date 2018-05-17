@@ -20,8 +20,8 @@
     </dd>
     <dt>APELLIDOS:</dt>
     <dd>
-      <input type="text" name="apellidos" id="apellidos" [(ngModel)]="VM.Elemento.apellidos" #apellidos="ngModel"
-      minlength="2" maxlength="10" upperCase>
+      <input type="email" name="apellidos" id="apellidos" [(ngModel)]="VM.Elemento.apellidos" #apellidos="ngModel"
+      minlength="2" maxlength="10" upperCase validateEqual="nombre">{{ !nombre.errors | json }}
       <span class="errorMsg" [hidden]="!apellidos.errors?.minlength && !apellidos.errors?.maxlength"> Debe tener entre 2 y 10 caractéres.</span>
       <span *ngIf="nombre?.errors?.upperCase"> Tiene que ir en mayúsculas</span>
     </dd>
@@ -34,6 +34,6 @@
   </dl>
   <p>
     <input type="button" value="Enviar" (click)="VM.send()" [disabled]="miForm.invalid">
-    <input type="button" value="Volver" (click)="VM.cancel()">
+    <input type="button" value="Volver" (winConfirm)="VM.cancel()" winConfirmMessage="¿Estas Seguro?" >
   </p>
 </form>
