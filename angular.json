@@ -30,7 +30,8 @@
             ],
             "scripts": [
               { "input": "./node_modules/jquery/dist/jquery.js" },
-              { "input": "./node_modules/bootstrap/dist/js/bootstrap.js" }
+              { "input": "./node_modules/bootstrap/dist/js/bootstrap.js" },
+              { "input": "./node_modules/popper.js/dist/umd/popper.js" }
             ]
           },
           "configurations": {
