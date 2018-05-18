@@ -80,7 +80,7 @@ export class PersonasViewComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.obs$ = this.route.paramMap.subscribe(
           params => {
-            const id = +params.get['id']; // (+) converts string 'id' to a number
+            const id = +params.get('id'); // (+) converts string 'id' to a number
             if (id) {
             this.vm.view(id);
           } else {

@@ -28,6 +28,7 @@ import { BLOG_COMPONENT } from './blog/blog.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MenuComponent } from './menu/menu.component';
+import { RegisterUserComponent } from './register-user/register-user.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { MenuComponent } from './menu/menu.component';
     LoginComponent,
     PageNotFoundComponent,
     MenuComponent,
+    RegisterUserComponent,
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(routes),

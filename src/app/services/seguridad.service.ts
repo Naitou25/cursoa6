@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { LoggerService } from '../../agio-core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
   export class AuthService {
@@ -58,13 +59,15 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
     get Name() { return this.auth.Name; }
 
     login(usr: string, pwd: string) {
-      return new Observable(observable => this.http.post('http://localhost:4321/login', { name: usr, password: pwd })
-      .subscribe(
-        data => {
-          this.auth.login(data['success'], data['token'], data['name']);
-          observable.next(this.auth.isAutenticated);
-        },
-        (err: HttpErrorResponse) => { observable.error(err); })
+      return new Observable(observable =>
+        this.http.post('http://localhost:4321/login', { name: usr, password: pwd })
+        .subscribe(
+          data => {
+           this.auth.login(data['success'], data['token'], data['name']);
+            observable.next(this.auth.isAutenticated);
+          },
+        (err: HttpErrorResponse) => { observable.error(err); }
+      )
       );
     }
   logout() {
@@ -79,7 +82,6 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!req.withCredentials && !this.auth.isAutenticated) {
       return next.handle(req);
     }
-    const authHeader = this.auth.AuthorizationHeader;
     const authReq = req.clone(
       { headers: req.headers.set('Authorization', this.auth.AuthorizationHeader) }
     );
@@ -104,7 +106,7 @@ export class LoggingInterceptor implements HttpInterceptor {
           error => ok = 'failed'
         ),
         finalize(() => {
-          this.out.log(`${req.method} "${req.urlWithParams}" ${ok} in ${Date.now() - started} ms.`);
+          this.out.log(`Traza ${req.method} "${req.urlWithParams}" ${ok} in ${Date.now() - started} ms.`);
         })
       );
   }
@@ -116,4 +118,27 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     return this.authService.isAutenticated;
   }
+}
+
+export class Role {
+  role: string = '';
+
+}
+
+export class User {
+  idUsuario: string = '';
+  password: string = '';
+  nombre: string = '';
+  roles: Array<Role> = [];
+}
+
+@Injectable({providedIn: 'root'})
+export class RegisterUserDAO {
+  private baseUrl = environment.WSUrl + 'register';
+  private options = { withCredentials: true };
+
+  constructor(private http: HttpClient) {  }
+  get() { return this.http.get<User>(this.baseUrl, this.options); }
+  add(item: User) { return this.http.post(this.baseUrl, item); }
+  change(item: User) { return this.http.put(this.baseUrl, item, this.options); }
 }

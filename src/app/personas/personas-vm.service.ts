@@ -4,6 +4,7 @@ import { LoggerService } from '../../agio-core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class PersonasDAOService {
@@ -26,8 +27,10 @@ export class PersonasDAOVMService {
   private elemento: any = {};
   private idOriginal = null;
   protected pk = 'id';
+  protected urlList = '/personas';
 
-  constructor(private dao: PersonasDAOService, private nsrv: NotifyService, private out: LoggerService) {
+  constructor(private dao: PersonasDAOService, private nsrv: NotifyService,
+    private out: LoggerService, private router: Router ) {
   }
     public get Modo() { return this.modo; }
     public get Listado() { return this.listado; }
@@ -35,7 +38,6 @@ export class PersonasDAOVMService {
 
      // comando que pide los datos
      public list() {
-       this.modo = 'list';
        this.dao.query().subscribe(
           data => {
             this.listado = data;
@@ -53,7 +55,6 @@ export class PersonasDAOVMService {
 
     // Metodo para editar el dato
     public edit(key: any) {
-
       this.dao.get(key).subscribe(
         data => {
           this.modo = 'edit';
@@ -92,7 +93,8 @@ export class PersonasDAOVMService {
       // Ponemos los valores de nuevo a null o vacíos para cancelar las modificaciones
       this.elemento = {};
       this.idOriginal = null;
-      this.list();
+      // this.list();
+      this.router.navigateByUrl(this.urlList);
     }
 
     public send() {
@@ -117,14 +119,6 @@ export class PersonasDAOVMService {
       }
     }
 }
-
-
-
-
-
-@Injectable({
-  providedIn: 'root'
-})
 
 export class PersonasVMService {
   // Creamos las variables privadas

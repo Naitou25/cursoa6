@@ -12,9 +12,11 @@ import { UnlessDirective } from './directives/estructurales.directive';
     CommonModule
   ],
   declarations: [FontSizerComponent, CADENAS_PIPES, VALIDACIONES_DIRECTIVES,
-    NUMERICOS_PIPES, WindowConfirmDirective, UnlessDirective],
+    NUMERICOS_PIPES, WindowConfirmDirective, UnlessDirective
+  ],
   exports: [FontSizerComponent, CADENAS_PIPES, VALIDACIONES_DIRECTIVES,
-    NUMERICOS_PIPES, WindowConfirmDirective, UnlessDirective],
+    NUMERICOS_PIPES, WindowConfirmDirective, UnlessDirective
+  ],
 })
 export class AgioCoreModule {
   constructor( @Optional() @SkipSelf() parentModule: AgioCoreModule) {
